@@ -14,62 +14,83 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatementOfWorkPage {
+public class SkillBandPage {
     public WebDriver ldriver;
     public WebDriverWait wait;
 
-
-    public StatementOfWorkPage(WebDriver rdriver) {
+    public SkillBandPage(WebDriver rdriver) {
         ldriver = rdriver;
         PageFactory.initElements(rdriver, this);
-        wait = new WebDriverWait(ldriver,10);
+        wait = new WebDriverWait(ldriver, 10);
     }
 
-    @FindBy(xpath = "//div[@class='col-lg-12 margin-bottom15']//a[3]")
+    By btnAddSkillBand = By.xpath("//a[@ng-click='vm.addEditSkill()']");
+
+    By txtSkillBand_menu= By.name("skillCategory");
+
+    By txtSkillDetail_menu= By.name("skillDetail");
+
+
+    @FindBy(xpath = "//button[@ng-click='actionMethod()']")
     @CacheLookup
-    WebElement btnStatementOfWork;
-
-    By txtShortJobSpec = By.xpath("//textarea[@ng-model='vm.job.ShortJobSpec']");
-
-    By txtCurrency = By.xpath("//div[@ng-model='vm.job.Currency']");
-
-    By txtProjectManager = By.xpath("//div[@ng-model='vm.job.ProjectManager']");
+    WebElement btnSave;
 
 
 
 
-    By btnQuestionOne = By.xpath("");
+    //#########################################ACTIONS##################################################
 
-    By btnQuestionTwo = By.xpath("");
-
-    By btnQuestionThree = By.xpath("");
-
-    By btnQuestionFour = By.xpath("");
-
-    By btnQuestionFive = By.xpath("");
-
-    By btnQuestionSix = By.xpath("");
-
-
-
-    //########################################ACTIONS############################################
-    public void clickBtnStatementOfWork(){
-        btnStatementOfWork.click();
+    //    public void clickBtnAddEmployment() throws Exception{
+//        Thread.sleep(3000);
+//
+//        new WebDriverWait(ldriver, 10).until(ExpectedConditions.elementToBeClickable(btnAddEmployment)).click();
+//
+//        ldriver.findElement(btnAddEmployment).click();
+//    }
+    //###################################################
+    public void click(WebElement element) {
+        //https://code.google.com/p/selenium/issues/detail?id=2766 (fix)
+        while(true){
+            try{
+                element.click();
+                break;
+            }catch (Throwable e){
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
     }
 
-    public void setTxtShortJobSpec(String text){
-        ldriver.findElement(txtShortJobSpec).sendKeys(text);
+    public void click(String css) {
+        //https://code.google.com/p/selenium/issues/detail?id=2766 (fix)
+        while(true){
+            try{
+                ldriver.findElement(btnAddSkillBand).click();
+                break;
+            }catch (Throwable e){
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
     }
+    //###################################################
 
-
-    public void setTxtCurrency_menu(String currency_menu) throws Exception {
+    public void setTxtSkillBand_menu(String costCode_menu) throws Exception {
         Thread.sleep(3000);
 
-        new WebDriverWait(ldriver, 20).until(ExpectedConditions.elementToBeClickable(txtCurrency)).click();
-        //ldriver.findElement(txtJobTitle_menu).sendKeys(organisation);
+        WebDriverWait waiting = new WebDriverWait(ldriver, 15, 100);
+
+        ldriver.findElement(txtSkillBand_menu).click();
+
     }
 
-    public void clickCurrency_menuitem_firstOption() {
+    public void clickSkillBand_menuitem_firstOption() {
         //Wait until the list of options is present
 
         //wait.until(ExpectedConditions.presenceOfElementLocated(txtJobTitle_menuitem));
@@ -83,9 +104,58 @@ public class StatementOfWorkPage {
                 .pause(500) // 500ms or 0.5s
                 .perform();
 
-        clickCurrency_menuitem();
+        clickSkillBand_menuitem();
     }
-    public void clickCurrency_menuitem() {
+    public void clickSkillBand_menuitem() {
+        WebDriverWait waiting = new WebDriverWait(ldriver, 15, 100);
+        //WebElement element = waiting.until(ExpectedConditions.visibilityOfElementLocated(txtOrganisation_menuitem));
+        //element.click();
+        //ldriver.findElement(txtJobTitle_menuitem);
+        List<By> locators = new ArrayList<>();
+        //locators.add(txtJobTitle_menuitem);
+        //locators.add(By.cssSelector("div.someClass"));
+        // add all your locators to the List<>
+
+        for (By locator : locators)
+        {
+            List<WebElement> elements = ldriver.findElements(locator);
+
+            if (elements.size() > 0)
+            {
+                elements.get(0).click();
+                break;
+            }
+        }
+
+
+    }
+
+
+
+    public void setTxtSkillDetail_menu(String costCode_menu) throws Exception {
+        Thread.sleep(3000);
+
+        new WebDriverWait(ldriver, 20).until(ExpectedConditions.elementToBeClickable(txtSkillDetail_menu)).click();
+        //ldriver.findElement(txtJobTitle_menu).sendKeys(organisation);
+    }
+
+    public void clickSkillDetail_menuitem_firstOption() {
+        //Wait until the list of options is present
+
+        //wait.until(ExpectedConditions.presenceOfElementLocated(txtJobTitle_menuitem));
+        //Initialize the Actions class
+        Actions actions = new Actions(ldriver);
+        //Execute the actions
+        actions .pause(500) // 500ms or 0.5s
+                .sendKeys(Keys.ARROW_DOWN)
+                .pause(500) // 500ms or 0.5s
+                .sendKeys(Keys.ENTER)
+                .pause(500) // 500ms or 0.5s
+                .perform();
+
+        clickSkillDetail_menuitem();
+    }
+    public void clickSkillDetail_menuitem() {
         WebDriverWait waiting = new WebDriverWait(ldriver, 15, 100);
         //WebElement element = waiting.until(ExpectedConditions.visibilityOfElementLocated(txtOrganisation_menuitem));
         //element.click();
@@ -108,53 +178,10 @@ public class StatementOfWorkPage {
     }
 
 
-    public void setTxtProjectManager_menu(String projectManager_menu) throws Exception {
-        Thread.sleep(3000);
 
-        new WebDriverWait(ldriver, 20).until(ExpectedConditions.elementToBeClickable(txtProjectManager)).click();
-        //ldriver.findElement(txtJobTitle_menu).sendKeys(organisation);
+
+
+    public void clickBtnSave(){
+        btnSave.click();
     }
-
-    public void clickProjectManager_menuitem_firstOption() {
-        //Wait until the list of options is present
-
-        //wait.until(ExpectedConditions.presenceOfElementLocated(txtJobTitle_menuitem));
-        //Initialize the Actions class
-        Actions actions = new Actions(ldriver);
-        //Execute the actions
-        actions .pause(500) // 500ms or 0.5s
-                .sendKeys(Keys.ARROW_DOWN)
-                .pause(500) // 500ms or 0.5s
-                .sendKeys(Keys.ENTER)
-                .pause(500) // 500ms or 0.5s
-                .perform();
-
-        clickCurrency_menuitem();
-    }
-    public void clickProjectManager_menuitem() {
-        WebDriverWait waiting = new WebDriverWait(ldriver, 15, 100);
-        //WebElement element = waiting.until(ExpectedConditions.visibilityOfElementLocated(txtOrganisation_menuitem));
-        //element.click();
-        //ldriver.findElement(txtJobTitle_menuitem);
-        List<By> locators = new ArrayList<>();
-        //locators.add(txtJobTitle_menuitem);
-        //locators.add(By.cssSelector("div.someClass"));
-        // add all your locators to the List<>
-
-        for (By locator : locators)
-        {
-            List<WebElement> elements = ldriver.findElements(locator);
-
-            if (elements.size() > 0)
-            {
-                elements.get(0).click();
-                break;
-            }
-        }
-    }
-
-
-
-
-
 }

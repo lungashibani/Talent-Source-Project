@@ -224,21 +224,61 @@ public class CreateCandidatePage {
     //#################################################################################################
 
 
-    public void txtFileInput() throws Exception {
+//    public void txtFileInput() throws Exception {
+//        Pattern fileNameInput = new Pattern("C:\\Users\\SHIBL\\Desktop\\Patterns\\FileNameInput.PNG");
+//        Pattern openButton = new Pattern("C:\\Users\\SHIBL\\Desktop\\Patterns\\openButton.PNG");
+//
+//        System.out.println(fileNameInput.getBImage());
+//
+//        Thread.sleep(5000);
+//
+//
+//        Screen screen = new Screen();
+//        screen.type("Demo CV.docx");
+//        //screen.click(openButton);
+//        clickOpen();
+//
+//
+//    }
+
+    public void txtFileInput() throws Exception
+    {
+
+        clickOpen();
+
         Pattern fileNameInput = new Pattern("C:\\Users\\SHIBL\\Desktop\\Patterns\\FileNameInput.PNG");
         Pattern openButton = new Pattern("C:\\Users\\SHIBL\\Desktop\\Patterns\\openButton.PNG");
 
-        System.out.println(fileNameInput.getBImage());
-
         Thread.sleep(5000);
+        // Pointer info
+        PointerInfo pi = MouseInfo.getPointerInfo();
+        Point mp = pi.getLocation();
+// The devices bounds
+        GraphicsDevice bounds = getDeviceBounds(pi.getDevice());
 
+// Create new "virtual" point based on the mouse point
+        Point virtualPoint = new Point(mp);
+// Subtract the x/y position of the device
+        virtualPoint.x -= bounds.getAvailableAcceleratedMemory();
+        virtualPoint.y -= bounds.getAvailableAcceleratedMemory();
+
+// Clip negative values...
+        if (virtualPoint.x < 0) {
+            virtualPoint.x *= -1;
+        }
+        if (virtualPoint.y < 0) {
+            virtualPoint.y *= -1;
+        }
+        
 
         Screen screen = new Screen();
-        screen.type("Demo CV.docx");
-        //screen.click(openButton);
-        clickOpen();
+        //screen.type(fileNameInput, "C:\\Users\\SHIBL\\Desktop\\Patterns\\openButton.PNG");
+        screen.type(fileNameInput, "DemoCV.docx");
+        screen.click(openButton);
+    }
 
-
+    public GraphicsDevice getDeviceBounds(GraphicsDevice device) {
+        return device;
     }
 
 

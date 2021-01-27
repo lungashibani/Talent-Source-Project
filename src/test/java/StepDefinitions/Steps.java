@@ -19,6 +19,10 @@ public class Steps {
     public CreateNewJobContractPage cnjc;
     public EmploymentHistoryPage ehp;
     public CreateNewJobPermanentPage cnjp;
+    public StatementOfWorkPage sow;
+    public SkillBandPage sbp;
+    public AddVendorAndSaveResume avp;
+    public CandidateSkillsAndQualificationsAddQualificationPage sqp;
 
 
 
@@ -35,6 +39,10 @@ public class Steps {
         cnjc = new CreateNewJobContractPage(driver);
         ehp = new EmploymentHistoryPage(driver);
         cnjp = new CreateNewJobPermanentPage(driver);
+        sow = new StatementOfWorkPage(driver);
+        sbp = new SkillBandPage(driver);
+        avp = new AddVendorAndSaveResume(driver);
+        sqp = new CandidateSkillsAndQualificationsAddQualificationPage(driver);
 
     }
 
@@ -46,6 +54,10 @@ public class Steps {
         ca = new CandidatesAddMultiplePage(driver);
         cnjc = new CreateNewJobContractPage(driver);
         ehp = new EmploymentHistoryPage(driver);
+        sow = new StatementOfWorkPage(driver);
+        sbp = new SkillBandPage(driver);
+        avp = new AddVendorAndSaveResume(driver);
+        sqp = new CandidateSkillsAndQualificationsAddQualificationPage(driver);
     }
 
     @When("User opens URL {string}")
@@ -477,10 +489,18 @@ public class Steps {
 
     //##############################################EMPLOYMENT HISTORY#################################
 
-    @When("User clicks on Add Employment")
-    public void user_clicks_on_add_employment() throws Exception{
-        ehp.clickBtnAddEmployment();
+//    @When("User clicks on Add Employment")
+//    public void user_clicks_on_add_employment() throws Exception{
+//        ehp.clickBtnAddEmployment();
+//    }
+
+
+    @When("User clicks on Add Employment as {string}")
+    public void user_clicks_on_add_employment_as(String stringText) {
+        ehp.click(stringText);
     }
+
+
 
     @When("User enters Employer as {string}")
     public void user_enters_employer_as(String employer) {
@@ -502,7 +522,208 @@ public class Steps {
         ehp.setTxtStartDate(startDate);
     }
 
+    @Then("User clicks on action Save button")
+    public void user_clicks_on_action_save_button() {
+        ehp.clickBtnSave();
+    }
+
+
     //#################################STATEMENT OF WORK##############################################
+
+    @Then("Clicks on Statement Of Work button")
+    public void clicks_on_statement_of_work_button() {
+        sow.clickBtnStatementOfWork();
+    }
+
+    @When("User enters Business Case {string}")
+    public void user_enters_business_case(String text) {
+        sow.setTxtShortJobSpec(text);
+    }
+
+    @When("User searches for Currency as {string}")
+    public void user_searches_for_currency_as(String currencyType) throws Exception{
+        sow.setTxtCurrency_menu(currencyType);
+    }
+
+    @Then("User clicks on Currency")
+    public void user_clicks_on_currency() {
+        sow.clickCurrency_menuitem_firstOption();
+    }
+
+    @Then("User searches for Project Manager as {string}")
+    public void user_searches_for_project_manager_as(String projectManager) throws Exception{
+        sow.setTxtProjectManager_menu(projectManager);
+    }
+
+    @Then("User selects on Project Manager")
+    public void user_selects_on_project_manager() {
+    sow.clickCurrency_menuitem_firstOption();
+    }
+
+
+    @When("User Selects Answer for Legal Question One")
+    public void user_selects_answer_for_legal_question_one() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("User Selects Answer for Legal Question Two")
+    public void user_selects_answer_for_legal_question_two() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @When("User Selects Answer for Legal Question Three")
+    public void user_selects_answer_for_legal_question_three() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @When("User Selects Answer for Legal Question Four")
+    public void user_selects_answer_for_legal_question_four() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("User Selects Answer for Legal Question Five")
+    public void user_selects_answer_for_legal_question_five() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @When("User Selects Answer for Legal Question Six")
+    public void user_selects_answer_for_legal_question_six() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    //###############################################Add a Skill Band#########################################
+
+    @When("User clicks on Add Skill Band as {string}")
+    public void user_clicks_on_add_skill_band_as(String skillBand) {
+        sbp.click(skillBand);
+    }
+
+    @When("User search for Skill Band menu as {string}")
+    public void user_search_for_skill_band_menu_as(String skillBand) throws Exception {
+        sbp.setTxtSkillBand_menu(skillBand);
+    }
+
+    @When("User clicks on Skill Band")
+    public void user_clicks_on_skill_band() {
+        sbp.clickSkillBand_menuitem_firstOption();
+    }
+
+    @When("User search for Skill Detail menu as {string}")
+    public void user_search_for_skill_detail_menu_as(String skillDetail) throws Exception{
+        sbp.setTxtSkillDetail_menu(skillDetail);
+    }
+
+    @When("User clicks on Skill Detail")
+    public void user_clicks_on_skill_detail() {
+        cnjc.clickSkillDetail_menuitem_firstOption();
+    }
+
+    @Then("User clicks on the Save button")
+    public void user_clicks_on_the_save_button() {
+        sbp.clickBtnSave();
+    }
+
+    //######################################Adds Vendor and Saves Resume######################################
+
+    @Then("User clicks on Save to add Vendor menu as {string}")
+    public void user_clicks_on_save_to_add_vendor_menu_as(String vendor) {
+        avp.click(vendor);
+    }
+
+    @When("User searches for a Vendor menu as {string}")
+    public void user_searches_for_a_vendor_menu_as(String vendor) throws Exception{
+        avp.setTxtVendor_menu(vendor);
+    }
+
+    @When("User selects a Vendor")
+    public void user_selects_a_vendor() {
+        avp.clickVendor_menuitem_firstOption();
+    }
+
+    @Then("User search for Source menu as {string}")
+    public void user_search_for_source_menu_as(String source) throws Exception{
+        avp.setTxtSource_menu(source);
+    }
+
+    @When("User selects Source")
+    public void user_selects_source() {
+        avp.clickSource_menuitem_firstOption();
+    }
+
+    @When("User selects the Save")
+    public void user_selects_the_save() {
+        avp.clickBtnSave();
+    }
+
+    //###########################################andidate - Skills and Qualifications Add Qualifications###########
+
+    @When("User clicks on Skills and Qualification")
+    public void user_clicks_on_skills_and_qualification() {
+        sqp.clickBtnSkillsAndQualification();
+    }
+
+    @Then("User clicks on Add Qualification")
+    public void user_clicks_on_add_qualification() {
+        sqp.clickBtnAdd();
+    }
+
+    @When("User searches for an Institution menu as {string}")
+    public void user_searches_for_an_institution_menu_as(String qualification) throws Exception{
+        sqp.setTxtQualification_menu(qualification);
+    }
+
+    @When("User selects an Institution")
+    public void user_selects_an_institution() {
+        sqp.clickQualification_menuitem_firstOption();
+    }
+
+    @Then("User search for Degree menu as {string}")
+    public void user_search_for_degree_menu_as(String degree) throws Exception{
+        sqp.setTxtDegree_menu(degree);
+    }
+
+    @When("User selects a Degree")
+    public void user_selects_a_degree() {
+        sqp.clickDegree_menuitem_firstOption();
+    }
+
+    @Then("User search for Level menu as {string}")
+    public void user_search_for_level_menu_as(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @When("User selects a Level")
+    public void user_selects_a_level() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("User search for Course Subject menu as {string}")
+    public void user_search_for_course_subject_menu_as(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @When("User selects a Course Subject")
+    public void user_selects_a_course_subject() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+
+
+
+
+
+
+
 
 
 

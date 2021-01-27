@@ -37,16 +37,55 @@ public class EmploymentHistoryPage {
     @CacheLookup
     WebElement txtStartDate;
 
+    @FindBy(xpath = "//button[@ng-click='actionMethod()']")
+    @CacheLookup
+    WebElement btnSave;
+
+
+
+
     //#########################################ACTIONS##################################################
 
-    public void clickBtnAddEmployment() throws Exception{
-        Thread.sleep(3000);
-
-        new WebDriverWait(ldriver, 10).until(ExpectedConditions.elementToBeClickable(btnAddEmployment)).click();
-
-        WebElement ele = ldriver.findElement(btnAddEmployment);
-        ele.click();
+//    public void clickBtnAddEmployment() throws Exception{
+//        Thread.sleep(3000);
+//
+//        new WebDriverWait(ldriver, 10).until(ExpectedConditions.elementToBeClickable(btnAddEmployment)).click();
+//
+//        ldriver.findElement(btnAddEmployment).click();
+//    }
+    //###################################################
+    public void click(WebElement element) {
+        //https://code.google.com/p/selenium/issues/detail?id=2766 (fix)
+        while(true){
+            try{
+                element.click();
+                break;
+            }catch (Throwable e){
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
     }
+
+        public void click(String css) {
+            //https://code.google.com/p/selenium/issues/detail?id=2766 (fix)
+            while(true){
+                try{
+                    ldriver.findElement(btnAddEmployment).click();
+                    break;
+                }catch (Throwable e){
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
+        }
+    //###################################################
 
     public void setTxtEmployer(String employer) {
         txtEmployer.clear();
@@ -66,5 +105,9 @@ public class EmploymentHistoryPage {
     public void setTxtStartDate(String startDate) {
         txtStartDate.clear();
         txtStartDate.sendKeys(startDate);
+    }
+
+    public void clickBtnSave(){
+        btnSave.click();
     }
 }

@@ -9,8 +9,10 @@ Feature: EmploymentHistory
     Then User enters Password as "LUpa$w0rd"
     And Click on SignIn button
 #    Then User clicks on Candidate button
-    When User clicks on Add Employment
+   # When User clicks on Add Employment
+    When User clicks on Add Employment as "text"
     And User enters Employer as "BMW"
     Then User enters Job Tile as "Cleaner"
     When User enters responsibilities as "Clean, dusting, sweeping, vacuuming, mopping, cleaning ceiling vents, restroom cleaning etc"
-    And User enters start date as "20-02-2021"
+    And User enters start date as "20-03-2021"
+    Then User clicks on action Save button

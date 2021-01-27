@@ -8,68 +8,62 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatementOfWorkPage {
+public class CandidateSkillsAndQualificationsAddQualificationPage {
     public WebDriver ldriver;
     public WebDriverWait wait;
 
-
-    public StatementOfWorkPage(WebDriver rdriver) {
+    public CandidateSkillsAndQualificationsAddQualificationPage(WebDriver rdriver) {
         ldriver = rdriver;
         PageFactory.initElements(rdriver, this);
-        wait = new WebDriverWait(ldriver,10);
+        wait = new WebDriverWait(ldriver, 10);
     }
 
-    @FindBy(xpath = "//div[@class='col-lg-12 margin-bottom15']//a[3]")
+    By btnSkillsAndQualification= By.xpath("//li[@ng-click=\"  vm.selectedTab = 'candidateSkills'\"]");
+
+    By btnAdd = By.xpath("");
+
+    By txtInstitution_menu= By.name("institution");
+
+    By txtDegree_menu= By.name("degree");
+
+    By txtLevel_menu= By.xpath("//div[@ng-model='vm.education.level']");
+
+    By txtCourseSubject_menu= By.name("courseSubject");
+
+    By txtCompletionDate = By.xpath("");
+
+
+
+    @FindBy(xpath = "//button[@data-ng-disabled='!vm.canSave()']")
     @CacheLookup
-    WebElement btnStatementOfWork;
+    WebElement btnSaves;
 
-    By txtShortJobSpec = By.xpath("//textarea[@ng-model='vm.job.ShortJobSpec']");
+    //##################################Actions#######################################################
 
-    By txtCurrency = By.xpath("//div[@ng-model='vm.job.Currency']");
-
-    By txtProjectManager = By.xpath("//div[@ng-model='vm.job.ProjectManager']");
-
-
-
-
-    By btnQuestionOne = By.xpath("");
-
-    By btnQuestionTwo = By.xpath("");
-
-    By btnQuestionThree = By.xpath("");
-
-    By btnQuestionFour = By.xpath("");
-
-    By btnQuestionFive = By.xpath("");
-
-    By btnQuestionSix = By.xpath("");
-
-
-
-    //########################################ACTIONS############################################
-    public void clickBtnStatementOfWork(){
-        btnStatementOfWork.click();
+    public void clickBtnSkillsAndQualification(){
+        ldriver.findElement(btnAdd).click();
     }
 
-    public void setTxtShortJobSpec(String text){
-        ldriver.findElement(txtShortJobSpec).sendKeys(text);
+    public void clickBtnAdd(){
+        ldriver.findElement(btnSkillsAndQualification).click();
     }
 
 
-    public void setTxtCurrency_menu(String currency_menu) throws Exception {
+    public void setTxtQualification_menu(String vendor_menu) throws Exception {
         Thread.sleep(3000);
 
-        new WebDriverWait(ldriver, 20).until(ExpectedConditions.elementToBeClickable(txtCurrency)).click();
-        //ldriver.findElement(txtJobTitle_menu).sendKeys(organisation);
+        WebDriverWait waiting = new WebDriverWait(ldriver, 15, 100);
+
+        ldriver.findElement(txtInstitution_menu).click();
+
     }
 
-    public void clickCurrency_menuitem_firstOption() {
+    public void clickQualification_menuitem_firstOption() {
         //Wait until the list of options is present
 
         //wait.until(ExpectedConditions.presenceOfElementLocated(txtJobTitle_menuitem));
@@ -83,9 +77,9 @@ public class StatementOfWorkPage {
                 .pause(500) // 500ms or 0.5s
                 .perform();
 
-        clickCurrency_menuitem();
+        clickQualification_menuitem();
     }
-    public void clickCurrency_menuitem() {
+    public void clickQualification_menuitem() {
         WebDriverWait waiting = new WebDriverWait(ldriver, 15, 100);
         //WebElement element = waiting.until(ExpectedConditions.visibilityOfElementLocated(txtOrganisation_menuitem));
         //element.click();
@@ -105,17 +99,21 @@ public class StatementOfWorkPage {
                 break;
             }
         }
+
+
     }
 
 
-    public void setTxtProjectManager_menu(String projectManager_menu) throws Exception {
+    public void setTxtDegree_menu(String vendor_menu) throws Exception {
         Thread.sleep(3000);
 
-        new WebDriverWait(ldriver, 20).until(ExpectedConditions.elementToBeClickable(txtProjectManager)).click();
-        //ldriver.findElement(txtJobTitle_menu).sendKeys(organisation);
+        WebDriverWait waiting = new WebDriverWait(ldriver, 15, 100);
+
+        ldriver.findElement(txtInstitution_menu).click();
+
     }
 
-    public void clickProjectManager_menuitem_firstOption() {
+    public void clickDegree_menuitem_firstOption() {
         //Wait until the list of options is present
 
         //wait.until(ExpectedConditions.presenceOfElementLocated(txtJobTitle_menuitem));
@@ -129,9 +127,9 @@ public class StatementOfWorkPage {
                 .pause(500) // 500ms or 0.5s
                 .perform();
 
-        clickCurrency_menuitem();
+        clickDegree_menuitem();
     }
-    public void clickProjectManager_menuitem() {
+    public void clickDegree_menuitem() {
         WebDriverWait waiting = new WebDriverWait(ldriver, 15, 100);
         //WebElement element = waiting.until(ExpectedConditions.visibilityOfElementLocated(txtOrganisation_menuitem));
         //element.click();
@@ -151,8 +149,9 @@ public class StatementOfWorkPage {
                 break;
             }
         }
-    }
 
+
+    }
 
 
 
